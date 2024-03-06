@@ -13,6 +13,7 @@ function App() {
   let [inputValue, setInputValue] = useState('');
   let [loading, setLoading] = useState(false);
   let [responseMessage, setResponseMessage] = useState(initialMessage);
+  let [totalHits, setTotalHits] = useState(0);
 
   const url = 'https://images-api.nasa.gov/search'
   const params = new URLSearchParams({
@@ -32,9 +33,11 @@ function App() {
       axios.get(`${url}?${params.toString()}`)
       .then((res) => {
         // typeof res.data === 'string'
-        console.log(res.data)  
-        setNasaData(res.data)
-        setImageData(res.data.collection.items)
+        const { collection } = res.data;
+        console.log(collection)
+        setNasaData(collection)
+        setImageData(collection.items)
+        setTotalHits(collection.metadata.total_hits)
         setLoading(false);
       })
       .catch((err) => {
@@ -45,15 +48,11 @@ function App() {
     // return clearTimeout(loadingDelay)
   }, [inputValue])
 
-  useEffect(() => {
-    console.log(nasaData)
-  }, [nasaData])
-
   return (
-    <div className={loading ? "loading" : ''}>
+    <div className={` bg ${loading ? " bg" : ''}`}>
       <section>
         <input type="text" placeholder='moon landing' value={inputValue} onChange={onChange} />
-        <h2></h2>
+        <h2>{totalHits}</h2>
       </section>
       <ResponseMessage responseMessage={responseMessage} />
       <ImageContainer nasaData={imageData}/>
