@@ -49,7 +49,7 @@ function App() {
   }, [inputValue])
 
   return (
-    <div className={` bg ${loading ? " bg" : ''}`}>
+    <div className={loading ? "loading" : ''}>
       <section>
         <input type="text" placeholder='moon landing' value={inputValue} onChange={onChange} />
         <h2>{totalHits}</h2>
