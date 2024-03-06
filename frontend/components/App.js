@@ -2,9 +2,25 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import ResponseMessage from './ResponseMessage';
 import ImageContainer from './ImageContainer';
+import styled from "styled-components";
 
 const initialMessage = '';                         
-const initialNasaData = []    
+const initialNasaData = [] 
+
+const StyledTitle = styled.section`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+`
+
+const StyledHeader = styled.section`
+  display: flex;
+  justify-content: space-between;
+  padding-inline: 10px;
+  padding-bottom: 10px;
+  border-bottom: solid black 2px;
+`
 
 function App() {
 
@@ -14,6 +30,7 @@ function App() {
   let [loading, setLoading] = useState(false);
   let [responseMessage, setResponseMessage] = useState(initialMessage);
   let [totalHits, setTotalHits] = useState(0);
+  let [amountOfResultsShown, setAmountOfResultsShown] = useState(30);
 
   const url = 'https://images-api.nasa.gov/search'
   const params = new URLSearchParams({
@@ -50,12 +67,18 @@ function App() {
 
   return (
     <div className={loading ? "loading" : ''}>
-      <section>
+      <StyledTitle>
+        <h1 className="title" >Search Nasa:</h1>
+        <h4>Showing {amountOfResultsShown} results</h4>
+      </StyledTitle>
+      <StyledHeader>
         <input type="text" placeholder='moon landing' value={inputValue} onChange={onChange} />
-        <h2>{totalHits}</h2>
-      </section>
+        {totalHits > amountOfResultsShown ? 
+        <h4>{`Total results: ${totalHits}`}</h4> :
+        <h4></h4> }
+      </StyledHeader>
       <ResponseMessage responseMessage={responseMessage} />
-      <ImageContainer nasaData={imageData}/>
+      <ImageContainer nasaData={imageData} amountOfResultsShown={amountOfResultsShown}/>
     </div>
   )
 }

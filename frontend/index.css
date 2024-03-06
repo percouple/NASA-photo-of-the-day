@@ -1,9 +1,39 @@
-
 * {
     margin: 0;
     font-family: monospace;
 }
 
 .image-card {
+    width: 100%;
+    max-width: 20vh;
+    min-width: 250px;
+    height: auto;
+    margin: 10px;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     
+}
+
+.image {
+    opacity: 1;
+    transition: .5s ease;
+    backface-visibility: hidden;
+}
+
+.image-card:hover .image {
+    opacity: 0.3;
+}
+
+
+.image-element {
+    max-width: inherit;
+    display: block;
+    text-wrap: wrap;
+    min-width: 250px;
+    pointer-events: none;
 }
