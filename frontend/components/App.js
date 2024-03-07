@@ -1,18 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import Title from './Title';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ResponseMessage from './ResponseMessage';
 import ImageContainer from './ImageContainer';
 import styled from "styled-components";
 
-const initialMessage = '';                         
-const initialNasaData = [] 
-
-const StyledTitle = styled.section`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-`
+const initialMessage = '';
+const initialNasaData = []
 
 const StyledHeader = styled.section`
   display: flex;
@@ -31,6 +25,7 @@ function App() {
   let [responseMessage, setResponseMessage] = useState(initialMessage);
   let [totalHits, setTotalHits] = useState(0);
   let [amountOfResultsShown, setAmountOfResultsShown] = useState(30);
+  let [debouncedInputValue, setDebouncedInputValue] = useState('');
 
   const url = 'https://images-api.nasa.gov/search'
   const params = new URLSearchParams({
@@ -41,44 +36,52 @@ function App() {
 
   const onChange = (e) => {
     const { value } = e.target;
+    setLoading(true);
     setInputValue(value);
   }
 
   useEffect(() => {
-    setLoading(true);
-    const loadingDelay = setTimeout(() => {
-      axios.get(`${url}?${params.toString()}`)
-      .then((res) => {
-        // typeof res.data === 'string'
-        const { collection } = res.data;
-        console.log(collection)
-        setNasaData(collection)
-        setImageData(collection.items)
-        setTotalHits(collection.metadata.total_hits)
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-    }, 1000)
+    const timeoutId = setTimeout(() => {
+      setDebouncedInputValue(inputValue);
+    }, 500); // Adjust the delay time as needed
 
-    // return clearTimeout(loadingDelay)
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, [inputValue])
+
+  useEffect(() => {
+    if (debouncedInputValue !== '') {
+      axios.get(`${url}?${params.toString()}`)
+        .then((res) => {
+          const { collection } = res.data;
+          setNasaData(collection)
+          setImageData(collection.items)
+          setTotalHits(collection.metadata.total_hits)
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err)
+          setLoading(false);
+        })
+    }
+
+  }, [debouncedInputValue])
 
   return (
     <div className={loading ? "loading" : ''}>
-      <StyledTitle>
-        <h1 className="title" >Search Nasa:</h1>
-        <h4>Showing {amountOfResultsShown} results</h4>
-      </StyledTitle>
+      <Title amountOfResultsShown={amountOfResultsShown}/>
       <StyledHeader>
         <input type="text" placeholder='moon landing' value={inputValue} onChange={onChange} />
-        {totalHits > amountOfResultsShown ? 
-        <h4>{`Total results: ${totalHits}`}</h4> :
-        <h4></h4> }
+        <h4>{`Total results: ${totalHits}`}</h4>
       </StyledHeader>
-      <ResponseMessage responseMessage={responseMessage} />
-      <ImageContainer nasaData={imageData} amountOfResultsShown={amountOfResultsShown}/>
+      <ResponseMessage
+        responseMessage={responseMessage} />
+      <ImageContainer
+        nasaData={imageData}
+        setLoading={setLoading}
+        loading={loading}
+        amountOfResultsShown={amountOfResultsShown} />
     </div>
   )
 }

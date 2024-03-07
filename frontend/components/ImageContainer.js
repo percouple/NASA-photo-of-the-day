@@ -21,7 +21,7 @@ export default function ImageContainer ({ nasaData, amountOfResultsShown }) {
 
     return (
         <StyledContainer>
-            {nasaData.slice(0, ).map((item, index) => (
+            {nasaData.slice(0, amountOfResultsShown).map((item, index) => (
                 <div className="image-card image" key={index}>
                     <img className="image-element" src={item.links[0].href} alt={item.data[0].title} />
                     {/* <h3 className="image-element">&quot;{item.data[0].title}&quot;</h3> */}
