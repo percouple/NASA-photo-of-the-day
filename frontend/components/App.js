@@ -19,7 +19,7 @@ function App() {
 
   let [nasaData, setNasaData] = useState(initialNasaData);
   let [imageData, setImageData] = useState([]);
-  let [inputValue, setInputValue] = useState('a');
+  let [inputValue, setInputValue] = useState('nebula');
   let [loading, setLoading] = useState(false);
   let [responseMessage, setResponseMessage] = useState(initialMessage);
   let [totalHits, setTotalHits] = useState(0);
@@ -28,7 +28,6 @@ function App() {
 
   const url = 'https://images-api.nasa.gov/search'
   const params = new URLSearchParams({
-    // q: '',
     description: inputValue,
     media_type: 'image'
   });

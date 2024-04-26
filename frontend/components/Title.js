@@ -9,7 +9,12 @@ const StyledTitle = styled.section`
 `
 
 const StyledSelect = styled.select`
+  background-color: white;
 
+  option {
+    background-color: white;
+    font-size: 200px;
+  };
 `
 
 export default function Title({ amountOfResultsShown, setAmountOfResultsShown, totalHits }) {

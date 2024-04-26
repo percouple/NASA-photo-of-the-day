@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const StyledCardSelectScreen = styled.div`
-    z-index: 9999;
+    position: relative;
+    z-index: 1000;
 `
 
 export default function CardSelectScreen({selectedCard, setSelectedCard}) {
