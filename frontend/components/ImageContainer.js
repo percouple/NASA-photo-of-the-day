@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import nasaLogo from "../nasa-logo.png";
 import Image from './Image';
-import CardSelectScreen from "./CardSelectScreen";
 
 // Background/Main container styling
 const StyledContainer = styled.div`
@@ -37,6 +36,7 @@ const StyledCard = styled.div`
   box-shadow: -6px 10px 0px 0px rgb(0, 0, 0);
   background-size: contain;
   background-repeat: no-repeat;
+  border-radius: 8px;
 
   .selected {
     border: solid red 2px;
@@ -48,17 +48,10 @@ const StyledCard = styled.div`
   } */
 `;
 
-export default function ImageContainer({ amountOfResultsShown, nasaData }) {
-  const [selectedCard, setSelectedCard] = useState(null);
+export default function ImageContainer({ amountOfResultsShown, imageData, setSelectedCard }) {
 
   // Reduce rendered data by amount of results shown
-  const reducedData = nasaData.slice(0, amountOfResultsShown);
-
-  // Handle for selecting the card
-  let selectedData = null;
-  if (selectedCard) {
-    selectedData = nasaData[selectedCard];
-  }
+  const reducedData = imageData.slice(0, amountOfResultsShown);
 
   const handleClick = (index) => {
     setSelectedCard(index);
@@ -66,12 +59,6 @@ export default function ImageContainer({ amountOfResultsShown, nasaData }) {
 
   return (
     <StyledContainer>
-      {typeof selectedCard === "number" && (
-        <CardSelectScreen
-          setSelectedCard={setSelectedCard}
-          selectedCard={selectedData}
-        />
-      )}
       {reducedData.map((item, index) => (
         <StyledCard onClick={() => handleClick(index)} id={index} key={index}>
           <Image item={item} />

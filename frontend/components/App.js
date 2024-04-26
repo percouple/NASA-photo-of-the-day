@@ -1,9 +1,9 @@
 import Title from "./Title";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import ImageContainer from "./ImageContainer";
 import styled from "styled-components";
 import Subheader from "./Subheader";
+import ContentDisplay from "./ContentDisplay";
 
 const initialNasaData = [];
 
@@ -23,6 +23,7 @@ function App() {
 
   // Input value change handler
   useEffect(() => {
+    setLoading(true);
     axios
       .get(`${url}?${params.toString()}`)
       .then((res) => {
@@ -51,12 +52,10 @@ function App() {
         setInputValue={setInputValue}
         inputValue={inputValue}
       />
-      <ImageContainer
-        amountOfResultsShown={amountOfResultsShown}
-        nasaData={imageData}
+      <ContentDisplay amountOfResultsShown={amountOfResultsShown}
+        imageData={imageData}
         setLoading={setLoading}
-        loading={loading}
-      />
+        loading={loading}/>
     </div>
   );
 }
