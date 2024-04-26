@@ -6,7 +6,8 @@ const StyledTitle = styled.section`
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-`
+  min-width: 500px;
+`;
 
 const StyledSelect = styled.select`
   background-color: white;
@@ -14,25 +15,37 @@ const StyledSelect = styled.select`
   option {
     background-color: white;
     font-size: 200px;
-  };
-`
+  }
+`;
 
-export default function Title({ amountOfResultsShown, setAmountOfResultsShown, totalHits }) {
+const SelectSentenceStyled = styled.span`
+  display: flex;
+  justify-content: space-around;
+  min-width: 250px;
+`;
 
+export default function Title({
+  setAmountOfResultsShown,
+  totalHits,
+}) {
   const onChange = (e) => {
     setAmountOfResultsShown(e.target.value);
-  }
+  };
 
-  return <StyledTitle>
-        <h1 className="title">Search NASA:</h1>
-        <h4>Showing &nbsp;
-          <StyledSelect defaultValue={10} onChange={onChange}>
-            <option>5</option>
-            <option>10</option>
-            <option>30</option>
-            <option>50</option>
-            <option>100</option>
-          </StyledSelect> results of {totalHits}</h4>
-      </StyledTitle>;
+  return (
+    <StyledTitle>
+      <h1 className="title">Search NASA:</h1>
+      <SelectSentenceStyled>
+      <h4>Showing </h4>
+      <StyledSelect defaultValue={10} onChange={onChange}>
+        <option>5</option>
+        <option>10</option>
+        <option>30</option>
+        <option>50</option>
+        <option>100</option>
+      </StyledSelect>
+      <h4>results of {totalHits}</h4>
+      </SelectSentenceStyled>
+    </StyledTitle>
+  );
 }
-  

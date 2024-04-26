@@ -16,6 +16,7 @@ const StyledContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   min-height: 800px;
 `;
 
@@ -24,7 +25,7 @@ const StyledCard = styled.div`
   width: 100%;
   max-width: 15vw;
   min-width: 250px;
-  height: auto;
+  height: fit-content;
   margin: 10px;
   padding: 10px;
   background-color: rgb(50, 50, 50);
@@ -40,6 +41,11 @@ const StyledCard = styled.div`
   .selected {
     border: solid red 2px;
   }
+
+  // TODO - Add shadow when user hovers over
+  /* &:hover {
+    box-shadow: inset 100px 100px 0 0 rgba(0, 0, 0, 0.7);
+  } */
 `;
 
 export default function ImageContainer({ amountOfResultsShown, nasaData }) {
