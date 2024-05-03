@@ -1,18 +1,25 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
 const StyledCardSelectScreen = styled.div`
-    position: relative;
-    z-index: 1000;
-`
+  /* position: sticky; */
+  top: 50%;
+  left: 50%;
+  z-index: 1000;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+`;
 
-export default function CardSelectScreen({selectedCard, setSelectedCard}) {
+export default function CardSelectScreen({ selectedCard, setSelectedCard }) {
 
-    console.log(selectedCard);
+  console.log(selectedCard);
 
-    return (
-        <StyledCardSelectScreen>
-            This is My card select Screen
-        </StyledCardSelectScreen>
-    )
+  return (
+    <div style={{position: "absolute"}}>
+      <StyledCardSelectScreen>
+        This is My card select Screen
+        <button onClick={() => setSelectedCard(null)}>X</button>
+      </StyledCardSelectScreen>
+    </div>
+  );
 }

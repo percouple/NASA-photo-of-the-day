@@ -1,24 +1,29 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import ImageContainer from "./ImageContainer";
-import CardSelectScreen from './CardSelectScreen';
+import CardSelectScreen from "./CardSelectScreen";
 
+export default function ContentDisplay(props) {
+  
+  const [selectedCard, setSelectedCard] = useState(null);
 
-export default function ContentDisplay (props) {
-
-    const [selectedCard, setSelectedCard] = useState(null);
-
-    if (selectedCard !== null) {
-        return <CardSelectScreen/>
-    } else {
-        return (
-            <ImageContainer
-            amountOfResultsShown={props.amountOfResultsShown}
-            imageData={props.imageData}
-            setLoading={props.setLoading}
-            loading={props.loading}
-            setSelectedCard={setSelectedCard}
-            />
-        )
-    }
-    
+  return (
+    <>
+      {selectedCard !== null ? (
+        <CardSelectScreen
+          selectedCard={selectedCard}
+          setSelectedCard={setSelectedCard}
+        />
+      ) : (
+        <></>
+      )}
+      <ImageContainer
+        amountOfResultsShown={props.amountOfResultsShown}
+        imageData={props.imageData}
+        setLoading={props.setLoading}
+        loading={props.loading}
+        setSelectedCard={setSelectedCard}
+        selectedCard={selectedCard}
+      />
+    </>
+  );
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import nasaLogo from "../nasa-logo.png";
 import Image from './Image';
@@ -7,10 +7,9 @@ import Image from './Image';
 const StyledContainer = styled.div`
   background-image: url(${nasaLogo});
   background-size: 86vh;
-  background-position: calc(50% + 30px) 50%;
+  background-position: calc(50% + 30px) calc(50% + 30px);
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-color: rgba(0, 0, 0, 0.15);
 
   padding-top: 10px;
   margin: 0px;
@@ -23,9 +22,7 @@ const StyledContainer = styled.div`
 
 // Card Styling
 const StyledCard = styled.div`
-  width: 100%;
-  max-width: 15vw;
-  min-width: 250px;
+  width: fit-content;
   height: fit-content;
   margin: 10px;
   padding: 7px;
@@ -50,7 +47,7 @@ const StyledCard = styled.div`
   } */
 `;
 
-export default function ImageContainer({ amountOfResultsShown, imageData, setSelectedCard }) {
+export default function ImageContainer({ amountOfResultsShown, imageData, setSelectedCard, selectedCard }) {
 
   // Reduce rendered data by amount of results shown
   const reducedData = imageData.slice(0, amountOfResultsShown);
@@ -62,7 +59,7 @@ export default function ImageContainer({ amountOfResultsShown, imageData, setSel
   return (
     <StyledContainer>
       {reducedData.map((item, index) => (
-        <StyledCard onClick={() => handleClick(index)} id={index} key={index}>
+        <StyledCard onClick={() => handleClick(index)} id={index} key={index} className={index === selectedCard ? "selected" : ''}>
           <Image item={item} />
         </StyledCard>
       ))}

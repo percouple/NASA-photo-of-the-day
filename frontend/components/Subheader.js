@@ -7,7 +7,6 @@ const StyledHeader = styled.section`
   padding-inline: 10px;
   padding-bottom: 10px;
   border-bottom: solid black 2px;
-  background-color: rgba(0, 0, 0, 0.15);
 `;
 
 const StyledSubmitButton = styled.button`
@@ -31,7 +30,6 @@ const StyledInput = styled.input`
 const initialMessage = "<-- Type a prompt to generate images";
 
 export default function Subheader({
-  setLoading,
   setInputValue,
   inputValue,
   totalHits,

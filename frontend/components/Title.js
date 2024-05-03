@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const StyledTitle = styled.section`
@@ -7,7 +7,6 @@ const StyledTitle = styled.section`
   align-items: center;
   padding: 10px;
   min-width: 500px;
-  background-color: rgba(0, 0, 0, 0.15);
 `;
 
 const StyledSelect = styled.select`

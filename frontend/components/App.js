@@ -1,5 +1,5 @@
 import Title from "./Title";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import Subheader from "./Subheader";
 import ContentDisplay from "./ContentDisplay";
@@ -10,7 +10,7 @@ const initialNasaData = [];
 function App() {
   let [nasaData, setNasaData] = useState(initialNasaData);
   let [imageData, setImageData] = useState([]);
-  let [inputValue, setInputValue] = useState("");
+  let [inputValue, setInputValue] = useState("g");
   let [loading, setLoading] = useState(false);
   let [totalHits, setTotalHits] = useState(0);
   let [amountOfResultsShown, setAmountOfResultsShown] = useState(10);
