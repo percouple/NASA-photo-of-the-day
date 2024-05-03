@@ -4,6 +4,8 @@ import styled from "styled-components";
 const StyledImg = styled.img`
   max-width: 250px;
   cursor: pointer;
+  animation: fade-in;
+  border-radius: 5px;
 `;
 
 export default function Image({ item }) {

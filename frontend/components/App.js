@@ -1,9 +1,9 @@
 import Title from "./Title";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import styled from "styled-components";
 import Subheader from "./Subheader";
 import ContentDisplay from "./ContentDisplay";
+import LoadingScreen from "./LoadingScreen";
 
 const initialNasaData = [];
 
@@ -22,23 +22,31 @@ function App() {
   });
 
   // Input value change handler
-  useEffect(() => {
-    setLoading(true);
-    axios
+  const submitForm = (e) => {
+    e.preventDefault();
+    if (inputValue !== ''){
+
+      setLoading(true);
+      axios
       .get(`${url}?${params.toString()}`)
       .then((res) => {
         const { collection } = res.data;
         setNasaData(collection);
         setImageData(collection.items);
         setTotalHits(collection.metadata.total_hits);
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000);
       })
       .catch((err) => {
         console.log(err);
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000);
       });
-  }, [inputValue]);
-
+    }
+  }
+    
   return (
     <div className={loading ? "loading" : ""}>
       <Title
@@ -51,11 +59,15 @@ function App() {
         totalHits={totalHits}
         setInputValue={setInputValue}
         inputValue={inputValue}
+        submitForm={submitForm}
       />
-      <ContentDisplay amountOfResultsShown={amountOfResultsShown}
+      {loading && <LoadingScreen />}
+      <ContentDisplay
+        amountOfResultsShown={amountOfResultsShown}
         imageData={imageData}
         setLoading={setLoading}
-        loading={loading}/>
+        loading={loading}
+      />
     </div>
   );
 }

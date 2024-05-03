@@ -6,10 +6,12 @@ import Image from './Image';
 // Background/Main container styling
 const StyledContainer = styled.div`
   background-image: url(${nasaLogo});
-  background-size: 90vh;
-  background-position: center;
+  background-size: 86vh;
+  background-position: calc(50% + 30px) 50%;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  background-color: rgba(0, 0, 0, 0.15);
+
   padding-top: 10px;
   margin: 0px;
   display: flex;
@@ -26,17 +28,17 @@ const StyledCard = styled.div`
   min-width: 250px;
   height: fit-content;
   margin: 10px;
-  padding: 10px;
-  background-color: rgb(50, 50, 50);
+  padding: 7px;
+  border-radius: 5px;
+  border: 3px solid black;
+  background-color: #EFA00B;
+  background-size: contain;
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: -6px 10px 0px 0px rgb(0, 0, 0);
-  background-size: contain;
-  background-repeat: no-repeat;
-  border-radius: 8px;
+  /* box-shadow: 6px 10px 0px 0px rgb(0, 0, 0); */
 
   .selected {
     border: solid red 2px;

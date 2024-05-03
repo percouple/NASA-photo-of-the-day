@@ -7,44 +7,71 @@ const StyledHeader = styled.section`
   padding-inline: 10px;
   padding-bottom: 10px;
   border-bottom: solid black 2px;
+  background-color: rgba(0, 0, 0, 0.15);
 `;
 
-const initialMessage = '<-- Type a prompt to generate images';
+const StyledSubmitButton = styled.button`
+  margin-left: 6px;
+  border: 1px black solid;
+
+  :hover {
+    border: none;
+    cursor: pointer;
+  }
+`;
+
+const StyledInput = styled.input`
+  :focus{
+    outline: none;
+    border:1px solid red;
+    box-shadow: 0 0 10px #719ECE;
+  }
+`;
+
+const initialMessage = "<-- Type a prompt to generate images";
 
 export default function Subheader({
   setLoading,
   setInputValue,
   inputValue,
   totalHits,
+  submitForm,
 }) {
-    
   let [responseMessage, setResponseMessage] = useState(initialMessage);
 
   // Input change handler
   const onChange = (e) => {
     const { value } = e.target;
-    setLoading(true);
     setInputValue(value);
   };
 
   // Message change handler
   useEffect(() => {
     if (totalHits) {
-      setResponseMessage(`${totalHits} images generated`);
+      setResponseMessage(`${totalHits} images gathered`);
       setTimeout(() => {
         setResponseMessage("");
-      }, 2000);
+      }, 3000);
     }
   }, [totalHits]);
 
   return (
     <StyledHeader>
-      <input
-        type="text"
-        placeholder="moon landing"
-        value={inputValue}
-        onChange={onChange}
-      />
+      <form onSubmit={submitForm}>
+        <StyledInput
+          style={{ border: "1px black solid" }}
+          type="text"
+          placeholder="moon landing"
+          value={inputValue}
+          onChange={onChange}
+        ></StyledInput>
+        <StyledSubmitButton
+          style={{ marginLeft: "6px", border: "1px black solid" }}
+          type="submit"
+        >
+          Go!
+        </StyledSubmitButton>
+      </form>
       <h4>{responseMessage}</h4>
     </StyledHeader>
   );
