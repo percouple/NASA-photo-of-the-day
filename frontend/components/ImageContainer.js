@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import nasaLogo from "../nasa-logo.png";
-import Image from './Image';
+import Image from "./Image";
 
 // Background/Main container styling
 const StyledContainer = styled.div`
@@ -10,7 +10,10 @@ const StyledContainer = styled.div`
   background-position: calc(50% + 30px) calc(50% + 30px);
   background-repeat: no-repeat;
   background-attachment: fixed;
+  background-color: rgba(50, 50, 50, 1);
+`;
 
+const Overlay = styled.div`
   padding-top: 10px;
   margin: 0px;
   display: flex;
@@ -18,24 +21,25 @@ const StyledContainer = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 800px;
+  width: 100%;
+   height: 100%; 
+  background-color: rgba(40, 40, 40, 0.7);
 `;
 
 // Card Styling
 const StyledCard = styled.div`
   width: fit-content;
   height: fit-content;
-  margin: 10px;
-  padding: 7px;
-  border-radius: 5px;
-  border: 3px solid black;
-  background-color: #EFA00B;
+  margin: 6px;
+  border-radius: 16px;
   background-size: contain;
+  /* border: 2px solid black; */
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* box-shadow: 6px 10px 0px 0px rgb(0, 0, 0); */
+  box-shadow: 10px 10px rgba(0, 0, 0, 1);
 
   .selected {
     border: solid red 2px;
@@ -47,8 +51,12 @@ const StyledCard = styled.div`
   } */
 `;
 
-export default function ImageContainer({ amountOfResultsShown, imageData, setSelectedCard, selectedCard }) {
-
+export default function ImageContainer({
+  amountOfResultsShown,
+  imageData,
+  setSelectedCard,
+  selectedCard,
+}) {
   // Reduce rendered data by amount of results shown
   const reducedData = imageData.slice(0, amountOfResultsShown);
 
@@ -58,11 +66,18 @@ export default function ImageContainer({ amountOfResultsShown, imageData, setSel
 
   return (
     <StyledContainer>
-      {reducedData.map((item, index) => (
-        <StyledCard onClick={() => handleClick(index)} id={index} key={index} className={index === selectedCard ? "selected" : ''}>
-          <Image item={item} />
-        </StyledCard>
-      ))}
+      <Overlay >
+        {reducedData.map((item, index) => (
+          <StyledCard
+            onClick={() => handleClick(index)}
+            id={index}
+            key={index}
+            className={index === selectedCard ? "selected" : ""}
+          >
+            <Image item={item} />
+          </StyledCard>
+        ))}
+      </Overlay>
     </StyledContainer>
   );
 }

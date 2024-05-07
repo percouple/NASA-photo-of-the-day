@@ -12,6 +12,7 @@ export default function ContentDisplay(props) {
         <CardSelectScreen
           selectedCard={selectedCard}
           setSelectedCard={setSelectedCard}
+          imageData={props.imageData}
         />
       ) : (
         <></>
