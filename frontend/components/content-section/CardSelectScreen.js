@@ -24,6 +24,8 @@ const ImageCard = styled.div`
   padding: 10px;
   max-width: 80vw;
   padding-top: 30px;
+  border: solid #777777 2px;
+  border-radius: 10px;
 `;
 
 const ImageCardText = styled.div`

@@ -7,9 +7,9 @@ const StyledLoadingScreen = styled.div`
     position: absolute;
     background-color: black;
     color: white;
-    width: 100vw;
+    width: 100%;
     height: 100%;
-    text-align: center;
+    /* text-align: center;
     animation: fade-out 2s normal;
     animation-delay: 2s;
     animation-iteration-count: 1;
@@ -21,12 +21,12 @@ const StyledLoadingScreen = styled.div`
         100% {
             opacity: 0;
         }
-    }
+    } */
 `;
 
 export default function LoadingScreen () {
 
     return <StyledLoadingScreen>
-            LOADING
+            FETCHING
         </StyledLoadingScreen>
 }

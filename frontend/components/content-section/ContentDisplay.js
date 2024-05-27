@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ImageContainer from "./ImageContainer";
+import ImageCollage from "./imageCollage/ImageCollage";
 import CardSelectScreen from "./CardSelectScreen";
 
 export default function ContentDisplay(props) {
@@ -17,7 +17,7 @@ export default function ContentDisplay(props) {
       ) : (
         <></>
       )}
-      <ImageContainer
+      <ImageCollage
         amountOfResultsShown={props.amountOfResultsShown}
         imageData={props.imageData}
         setLoading={props.setLoading}

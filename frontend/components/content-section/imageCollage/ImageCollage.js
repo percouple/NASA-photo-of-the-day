@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import nasaLogo from "../nasa-logo.png";
+import nasaLogo from "../../../nasa-logo.png";
 import Image from "./Image";
 
 // Background/Main container styling
 const StyledContainer = styled.div`
   background-image: url(${nasaLogo});
-  background-size: 86vh;
+  background-size: 100%;
   background-position: calc(50% + 30px) calc(50% + 30px);
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -31,15 +31,14 @@ const StyledCard = styled.div`
   width: fit-content;
   height: fit-content;
   margin: 6px;
-  border-radius: 16px;
+  border-radius: 10px;
   background-size: contain;
-  /* border: 2px solid black; */
+  border: 4px solid black;
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: 10px 10px rgba(0, 0, 0, 1);
 
   .selected {
     border: solid red 2px;

@@ -1,16 +1,16 @@
-import Title from "./Title";
+import Title from "./title-bar/Title";
 import React, { useState } from "react";
 import axios from "axios";
-import Subheader from "./Subheader";
-import ContentDisplay from "./ContentDisplay";
-import LoadingScreen from "./LoadingScreen";
+import Subheader from "./title-bar/Subheader";
+import ContentDisplay from "./content-section/ContentDisplay";
+import LoadingScreen from "./content-section/LoadingScreen";
 
 const initialNasaData = [];
 
 function App() {
   let [nasaData, setNasaData] = useState(initialNasaData);
   let [imageData, setImageData] = useState([]);
-  let [inputValue, setInputValue] = useState("g");
+  let [inputValue, setInputValue] = useState("");
   let [loading, setLoading] = useState(false);
   let [totalHits, setTotalHits] = useState(0);
   let [amountOfResultsShown, setAmountOfResultsShown] = useState(10);
