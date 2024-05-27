@@ -22,7 +22,7 @@ const Overlay = styled.div`
   align-items: center;
   min-height: 800px;
   width: 100%;
-   height: 100%; 
+  height: 100%;
   background-color: rgba(40, 40, 40, 0.7);
 `;
 
@@ -45,7 +45,20 @@ const StyledCard = styled.div`
   }
 
   // TODO - Add shadow when user hovers over
-  /* &:hover {
+  &:hover::after {
+    display: block;
+    content: "Click ";
+    position: absolute;
+    /* top: 0;
+    left: 0; */
+    width: auto;
+    height: auto;
+    background-color: rgba(0, 0, 0, 1); /* Adjust shadow color and opacity */
+    background-size: 100%;
+    border-radius: 10px;
+    z-index: 1000;
+  }
+  /* &::hover {
     box-shadow: inset 100px 100px 0 0 rgba(0, 0, 0, 0.7);
   } */
 `;
@@ -65,7 +78,7 @@ export default function ImageContainer({
 
   return (
     <StyledContainer>
-      <Overlay >
+      <Overlay>
         {reducedData.map((item, index) => (
           <StyledCard
             onClick={() => handleClick(index)}
